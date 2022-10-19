@@ -109,10 +109,7 @@
             </table>
             <div class="btn-group">
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditAct">Edit Activites</button>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddAct">Add Activites</button>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delActivity">Delete Activites</button>
             </div>
-
             <!-- Edit Modal -->
             <div class="modal fade" id="EditAct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
@@ -163,119 +160,112 @@
                     <textarea class="form-label" id="actDesc" rows="5" cols="70"></textarea>
                   </div>
                   <div class="modal-footer">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary"  onclick="addActivity();">Add Activity</button>
+                      <button type="button" class="btn btn-primary"  onclick="deleteActivity();">Delete Activity</button>
+                    </div>
                     <button type="button" class="btn btn-primary" onclick="editActivity();">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Add Modal -->
-            <div class="modal fade" id="AddAct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add Activity</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <table class="table table-hover" id="tableEdit">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Activity Name</th>
-                          <th scope="col">Points</th>
-                          <th scope="col">Activity Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr >
-                          <th scope= "row">1</th>
-                          <td>get dunkd</td>
-                          <td>1000</td>
-                          <td>gettin dunkd</td>
-                        </tr>
-                        <tr>
-                          <th scope = "row">2</th>
-                          <td>get dunkd</td>
-                          <td>1000</td>
-                          <td>gettin dunkd</td>
-                        </tr>
-                        <tr>
-                          <th scope = "row">3</th>
-                          <td>get dunkd</td>
-                          <td>1000</td>
-                          <td>gettin dunkd</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <label for="actNo" class="form-label" >Activity Number</label>
-                    <input type="text" class="form-control" id="actNo" required>
-                    <label for="actName" class="form-label" >Activity Name</label>
-                    <input type="text" class="form-control" id="actName" required>
-                    <label for="actPoints" class="form-label" >Points</label>
-                    <input type="text" class="form-control" id="actPoints" required>
-                    <p></p>
-                    <label for="actDesc" class="form-label" >Activity Description</label>
-                    <textarea class="form-label" id="actDesc" rows="5" cols="70"></textarea>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="editActivity();">Save Changes</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="card">
+          <h3 class="card-header">Active Benefits</h3>
+          <div class="card-body">
+            <table class="table table-hover" id="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Benefit Code</th>
+                  <th scope="col">Benefit Cost</th>
+                  <th scope="col">Benefit Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <th scope= "row">1</th>
+                  <td>DKD100</td>
+                  <td>100</td>
+                  <td>get dunkd</td>
+                </tr>
+                <tr>
+                  <th scope = "row">2</th>
+                  <td>DKD101</td>
+                  <td>100</td>
+                  <td>get dunkd</td>
+                </tr>
+                <tr>
+                  <th scope = "row">3</th>
+                  <td>DKD102</td>
+                  <td>100</td>
+                  <td>get dunkd</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditBen">Edit Benefits</button>
             </div>
-            <!-- Delete Modal -->
-            <div class="modal fade" id="delActivity" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!-- Edit Benefit Modal -->
+            <div class="modal fade" id="EditBen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Delete Activity</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Edit Benefit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <table class="table table-hover" id="tableEdit">
+                    <table class="table table-hover" id="tableBenefit">
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Activity Name</th>
-                          <th scope="col">Points</th>
-                          <th scope="col">Activity Description</th>
+                          <th scope="col">Benefit Code</th>
+                          <th scope="col">Benefit Cost</th>
+                          <th scope="col">Benefit Description</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr >
                           <th scope= "row">1</th>
+                          <td>DKD100</td>
+                          <td>100</td>
                           <td>get dunkd</td>
-                          <td>1000</td>
-                          <td>gettin dunkd</td>
                         </tr>
                         <tr>
                           <th scope = "row">2</th>
+                          <td>DKD101</td>
+                          <td>100</td>
                           <td>get dunkd</td>
-                          <td>1000</td>
-                          <td>gettin dunkd</td>
                         </tr>
                         <tr>
                           <th scope = "row">3</th>
+                          <td>DKD102</td>
+                          <td>100</td>
                           <td>get dunkd</td>
-                          <td>1000</td>
-                          <td>gettin dunkd</td>
                         </tr>
                       </tbody>
                     </table>
-                    <label for="actNo" class="form-label" >Activity Number</label>
-                    <input type="text" class="form-control" id="actNo" required>
-                    <label for="actName" class="form-label" >Activity Name</label>
-                    <input type="text" class="form-control" id="actName" required>
-                    <label for="actPoints" class="form-label" >Points</label>
-                    <input type="text" class="form-control" id="actPoints" required>
+                    <label for="benNo" class="form-label" >Benefit Number</label>
+                    <input type="text" class="form-control" id="benNo" required>
+                    <label for="benCode" class="form-label" >Benefit Code</label>
+                    <input type="text" class="form-control" id="benCode" required>
+                    <label for="benCost" class="form-label" >Cost</label>
+                    <input type="text" class="form-control" id="benCost" required>
                     <p></p>
-                    <label for="actDesc" class="form-label" >Activity Description</label>
-                    <textarea class="form-label" id="actDesc" rows="5" cols="70"></textarea>
+                    <label for="benDesc" class="form-label" >Benefit Description</label>
+                    <textarea class="form-label" id="benDesc" rows="5" cols="70"></textarea>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="deleteActivity();">Save Changes</button>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary"  onclick="addBenefit();">Add Benefit</button>
+                      <button type="button" class="btn btn-primary"  onclick="deleteBenefit();">Delete Benefit</button>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="editBenefit();">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
@@ -290,30 +280,37 @@
 
 
     <div class="container-fluid p-5 text-dark text-center bg-light">
-        <div class="row">
-          <div class="col-sm-3 text-center">
-            <img src="img/logo2.png" alt="Avatar Logo" style="width:100%;">
-          </div>
-          <div class="col-sm-3 text-center"  style="font-family: 'Franklin Gothic Medium';">
-            <h2 style="color: #f54c0a;"><b>Address</b></h2>
-            <p>Robert Sobukwe Rd, Bellville, Cape Town, 7535</p>
-            <p>021 959 2911</p>
-          </div>
-          <div class="col-sm-3 text-center">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.2959386993225!2d18.62576931495849!3d-33.933515829851515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc500dde0e3503%3A0xd475bced40a7283a!2sUniversity%20of%20the%20Western%20Cape!5e0!3m2!1sen!2sza!4v1662211900909!5m2!1sen!2sza" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-          <div class="col-sm-3 text-center"  style="font-family: 'Franklin Gothic Medium';">
-            <h2 style="color: #f54c0a;"><b>Socials</b></h2>
-            <a href="https://www.facebook.com/"><img src="img/facebook.png" alt="Avatar Logo" style="width:50px;" class="p-2"></a>
-            <a href="https://www.instagram.com/"><img src="img/instagram.png" alt="Avatar Logo" style="width:50px;" class="p-2"></a>
-            <a href="https://www.youtube.com/"><img src="img/youtube.png" alt="Avatar Logo" style="width:50px;" class="p-2"></a>
-          </div>
+      <div class="row">
+        <div class="col-sm-3 text-center">
+          <img src="img/logo2.png" alt="Avatar Logo" style="width:100%;">
         </div>
+        <div class="col-sm-3 text-center" style="font-family: 'Franklin Gothic Medium';">
+          <h2 style="color: #f54c0a;"><b>Address</b></h2>
+          <p>Robert Sobukwe Rd, Bellville, Cape Town, 7535</p>
+          <p>021 959 2911</p>
+        </div>
+        <div class="col-sm-3 text-center">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.2959386993225!2d18.62576931495849!3d-33.933515829851515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc500dde0e3503%3A0xd475bced40a7283a!2sUniversity%20of%20the%20Western%20Cape!5e0!3m2!1sen!2sza!4v1662211900909!5m2!1sen!2sza"
+            width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="col-sm-3 text-center" style="font-family: 'Franklin Gothic Medium';">
+          <h2 style="color: #f54c0a;"><b>Socials</b></h2>
+          <a href="https://www.facebook.com/"><img src="img/facebook.png" alt="Avatar Logo" style="width:50px;"
+              class="p-2"></a>
+          <a href="https://www.instagram.com/"><img src="img/instagram.png" alt="Avatar Logo" style="width:50px;"
+              class="p-2"></a>
+          <a href="https://www.youtube.com/"><img src="img/youtube.png" alt="Avatar Logo" style="width:50px;"
+              class="p-2"></a>
+        </div>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
 
     </script>
   </body>
+
   <script>
   function eyePassword(){
     var x = document.getElementById("adPassword");
@@ -397,6 +394,82 @@
     document.getElementById("actPoints").value="";
     document.getElementById("actDesc").value="";
   }
+  var benefitTable = document.getElementById("tableBenefit");
+ function selectedBenefit(){
+   for (var i = 0; i < benefitTable.rows.length; i++) {
+     benefitTable.rows[i].onclick = function(){
+       rIndex = this.rowIndex;
+       document.getElementById("benNo").value = this.cells[0].innerHTML;
+       document.getElementById("benCode").value = this.cells[1].innerHTML;
+       document.getElementById("benCost").value = this.cells[2].innerHTML;
+       document.getElementById("benDesc").value = this.cells[3].innerHTML;
+     };
+   }
+ }
+ selectedBenefit();
+ function checkBenEmptyInput(){
+   var isEmpty = false;
+   document.getElementById("benNo").value;
+   document.getElementById("benCode").value;
+   document.getElementById("benCost").value;
+   document.getElementById("benDesc").value;
+   var benNo = document.getElementById("benNo").value;
+   var benCode = document.getElementById("benCode").value;
+   var benCost = document.getElementById("benCost").value;
+   var benDesc = document.getElementById("benDesc").value;
+   if (benNo ==""){
+     alert("benNo is Empty");
+     isEmpty = true;
+   } else if (benCode =="") {
+     alert("benCode is Empty");
+     isEmpty = true;
+   } else if(benCost==""){
+     alert("benCost is Empty");
+     isEmpty = true;
+   }else if(benDesc==""){
+     alert("benDesc is Empty");
+     isEmpty = true;
+   }
+   return isEmpty;
+ }
+ function addBenefit(){
+   if (!checkBenEmptyInput()) {
+     var newBen = benefitTable.insertRow(benefitTable.length);
+     var bNo = newBen.insertCell(0);
+     var bCode = newBen.insertCell(1);
+     var bCost = newBen.insertCell(2);
+     var bDesc = newBen.insertCell(3);
+     var benNo1 = document.getElementById("benNo").value;
+     var benCode1 = document.getElementById("benCode").value;
+     var benCost1 = document.getElementById("benCost").value;
+     var benDesc1 = document.getElementById("benDesc").value;
+     bNo.innerHTML = benNo1;
+     bCode.innerHTML = benCode1;
+     bCost.innerHTML = benCost1;
+     bDesc.innerHTML = benDesc1;
+     selectedBenefit();
+   }
+ }
+
+ function editBenefit(){
+   var benNo = document.getElementById("benNo").value;
+   var benCode = document.getElementById("benCode").value;
+   var benCost = document.getElementById("benCost").value;
+   var benDesc = document.getElementById("benDesc").value;
+   if(!checkBenEmptyInput()){
+     benefitTable.rows[rIndex].cells[0].innerHTML = benNo;
+     benefitTable.rows[rIndex].cells[1].innerHTML = benCode;
+     benefitTable.rows[rIndex].cells[2].innerHTML = benCost;
+     benefitTable.rows[rIndex].cells[3].innerHTML =benDesc;
+   }
+ }
+ function deleteBenefit(){
+   benefitTable.deleteRow(rIndex);
+   document.getElementById("benNo").value="";
+   document.getElementById("benCode").value="";
+   document.getElementById("benCost").value="";
+   document.getElementById("benDesc").value="";
+ }
 
 
   </script>
