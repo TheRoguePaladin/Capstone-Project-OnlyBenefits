@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OnlyBenefits</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  </head>
+  <body  style="background-color:#02083d">
+
+    <nav class="navbar navbar-expand-sm sticky-top navbar-dark bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="home.html"><img src="img/logoob.png" alt="Avatar Logo" style="width:200px;"></a>
+        <ul class="navbar-nav ">
+          <li class="nav-item " style="font-size: 30px; color: black;">
+            <a class="nav-link text-dark" href="home.html">HOME&nbsp&nbsp&nbsp&nbsp</a>
+          </li>
+          <li class="nav-item" style="font-size: 30px;">
+            <a class="nav-link  text-dark" href="view events.html">VIEW EVENTS&nbsp&nbsp&nbsp&nbsp</a>
+          </li>
+          <li class="nav-item" style="font-size: 30px;">
+            <a class="nav-link  text-dark" href="profile.html">PROFILE&nbsp&nbsp&nbsp&nbsp</a>
+          </li>
+          <li class="nav-item" style="font-size: 30px;">
+            <a class="nav-link  text-dark" href="aboutus.html">ABOUT</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><img src="img/avatar.png" alt="Avatar Logo" style="width:60px;" class="rounded-pill"></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="viewbooking.html">View</a></li>
+              <li><a class="dropdown-item" href="login.html">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container text-dark my-3" style="font-size: 20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+
+      <div class="row">
+        <div class="card">
+          <h3 class="card-header">User Details</h3>
+          <div class="card-body">
+            <div class="mb-3 row">
+              <label for="adName" class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="adName" >
+              </div>
+
+              <label for="adSurname" class="col-sm-2 col-form-label">Surname</label>
+              <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="adSurName" >
+              </div>
+              <label for="adEmail" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="adEmail">
+              </div>
+              <label for="adPassword" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <div class="input-group mb-3">
+                  <input type="password" readonly class="form-control" id="adPassword" value="ds">
+                  <div class="input-group-text">
+                    <input class = "form-check-input" type="checkbox"  onclick ="eyePassword();">eye</input>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="editadminprofile.html"><button type="button" class="btn btn-primary" name="button">Edit Profile</button><a>
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <div class="row">
+        <div class="card">
+          <h3 class="card-header">Active Activities</h3>
+          <div class="card-body">
+            <table class="table table-hover" id="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Activity Name</th>
+                  <th scope="col">Points</th>
+                  <th scope="col">Activity Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <th scope= "row">1</th>
+                  <td>get dunkd</td>
+                  <td>1000</td>
+                  <td>gettin dunkd</td>
+                </tr>
+                <tr>
+                  <th scope = "row">2</th>
+                  <td>get dunkd</td>
+                  <td>1000</td>
+                  <td>gettin dunkd</td>
+                </tr>
+                <tr>
+                  <th scope = "row">3</th>
+                  <td>get dunkd</td>
+                  <td>1000</td>
+                  <td>gettin dunkd</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditAct">Edit Activites</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddAct">Add Activites</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delActivity">Delete Activites</button>
+            </div>
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="EditAct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Edit Activity</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-hover" id="tableEdit">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Activity Name</th>
+                          <th scope="col">Points</th>
+                          <th scope="col">Activity Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr >
+                          <th scope= "row">1</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                        <tr>
+                          <th scope = "row">2</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                        <tr>
+                          <th scope = "row">3</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <label for="actNo" class="form-label" >Activity Number</label>
+                    <input type="text" class="form-control" id="actNo" required>
+                    <label for="actName" class="form-label" >Activity Name</label>
+                    <input type="text" class="form-control" id="actName" required>
+                    <label for="actPoints" class="form-label" >Points</label>
+                    <input type="text" class="form-control" id="actPoints" required>
+                    <p></p>
+                    <label for="actDesc" class="form-label" >Activity Description</label>
+                    <textarea class="form-label" id="actDesc" rows="5" cols="70"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="editActivity();">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Add Modal -->
+            <div class="modal fade" id="AddAct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Activity</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-hover" id="tableEdit">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Activity Name</th>
+                          <th scope="col">Points</th>
+                          <th scope="col">Activity Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr >
+                          <th scope= "row">1</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                        <tr>
+                          <th scope = "row">2</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                        <tr>
+                          <th scope = "row">3</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <label for="actNo" class="form-label" >Activity Number</label>
+                    <input type="text" class="form-control" id="actNo" required>
+                    <label for="actName" class="form-label" >Activity Name</label>
+                    <input type="text" class="form-control" id="actName" required>
+                    <label for="actPoints" class="form-label" >Points</label>
+                    <input type="text" class="form-control" id="actPoints" required>
+                    <p></p>
+                    <label for="actDesc" class="form-label" >Activity Description</label>
+                    <textarea class="form-label" id="actDesc" rows="5" cols="70"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="editActivity();">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Delete Modal -->
+            <div class="modal fade" id="delActivity" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Activity</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-hover" id="tableEdit">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Activity Name</th>
+                          <th scope="col">Points</th>
+                          <th scope="col">Activity Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr >
+                          <th scope= "row">1</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                        <tr>
+                          <th scope = "row">2</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                        <tr>
+                          <th scope = "row">3</th>
+                          <td>get dunkd</td>
+                          <td>1000</td>
+                          <td>gettin dunkd</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <label for="actNo" class="form-label" >Activity Number</label>
+                    <input type="text" class="form-control" id="actNo" required>
+                    <label for="actName" class="form-label" >Activity Name</label>
+                    <input type="text" class="form-control" id="actName" required>
+                    <label for="actPoints" class="form-label" >Points</label>
+                    <input type="text" class="form-control" id="actPoints" required>
+                    <p></p>
+                    <label for="actDesc" class="form-label" >Activity Description</label>
+                    <textarea class="form-label" id="actDesc" rows="5" cols="70"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="deleteActivity();">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="container-fluid p-5 text-dark text-center bg-light">
+        <div class="row">
+          <div class="col-sm-3 text-center">
+            <img src="img/logo2.png" alt="Avatar Logo" style="width:100%;">
+          </div>
+          <div class="col-sm-3 text-center"  style="font-family: 'Franklin Gothic Medium';">
+            <h2 style="color: #f54c0a;"><b>Address</b></h2>
+            <p>Robert Sobukwe Rd, Bellville, Cape Town, 7535</p>
+            <p>021 959 2911</p>
+          </div>
+          <div class="col-sm-3 text-center">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.2959386993225!2d18.62576931495849!3d-33.933515829851515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc500dde0e3503%3A0xd475bced40a7283a!2sUniversity%20of%20the%20Western%20Cape!5e0!3m2!1sen!2sza!4v1662211900909!5m2!1sen!2sza" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="col-sm-3 text-center"  style="font-family: 'Franklin Gothic Medium';">
+            <h2 style="color: #f54c0a;"><b>Socials</b></h2>
+            <a href="https://www.facebook.com/"><img src="img/facebook.png" alt="Avatar Logo" style="width:50px;" class="p-2"></a>
+            <a href="https://www.instagram.com/"><img src="img/instagram.png" alt="Avatar Logo" style="width:50px;" class="p-2"></a>
+            <a href="https://www.youtube.com/"><img src="img/youtube.png" alt="Avatar Logo" style="width:50px;" class="p-2"></a>
+          </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+
+    </script>
+  </body>
+  <script>
+  function eyePassword(){
+    var x = document.getElementById("adPassword");
+    if (x.type == "password"){
+      x.type = "text";
+    }else{
+      x.type = "password";
+    }
+  }
+  var table = document.getElementById("tableEdit");
+  var rIndex;
+  function selectedRow(){
+    for (var i = 0; i < table.rows.length; i++) {
+      table.rows[i].onclick = function(){
+        rIndex = this.rowIndex;
+        document.getElementById("actNo").value = this.cells[0].innerHTML;
+        document.getElementById("actName").value = this.cells[1].innerHTML;
+        document.getElementById("actPoints").value = this.cells[2].innerHTML;
+        document.getElementById("actDesc").value = this.cells[3].innerHTML;
+      };
+    }
+  }
+  selectedRow();
+  function checkEmptyInput(){
+    var isEmpty = false;
+    var actName = document.getElementById("actName").value;
+    var actPoints = document.getElementById("actPoints").value;
+    var actDesc = document.getElementById("actDesc").value;
+    var actNo = document.getElementById("actNo").value;
+    if (actName ==""){
+      alert("ActName is Empty");
+      isEmpty = true;
+    } else if (actPoints =="") {
+      alert("actPoints is Empty");
+      isEmpty = true;
+    } else if(actDesc==""){
+      alert("actDesc is Empty");
+      isEmpty = true;
+    }else if(actNo==""){
+      alert("actNo is Empty");
+      isEmpty = true;
+    }
+    return isEmpty;
+  }
+  function addActivity(){
+    if (!checkEmptyInput()) {
+      var newAct = table.insertRow(table.length);
+      var aNo = newAct.insertCell(0);
+      var aName = newAct.insertCell(1);
+      var aPoint = newAct.insertCell(2);
+      var aDesc = newAct.insertCell(3);
+      var actNo = document.getElementById("actNo").value;
+      var actName = document.getElementById("actName").value;
+      var actPoints = document.getElementById("actPoints").value;
+      var actDesc = document.getElementById("actDesc").value;
+      aNo.innerHTML = actNo;
+      aName.innerHTML = actName;
+      aPoint.innerHTML = actPoints;
+      aDesc.innerHTML = actDesc;
+      selectedRow();
+
+    }
+  }
+
+  function editActivity(){
+    var actNo = document.getElementById("actNo").value;
+    var actName = document.getElementById("actName").value;
+    var actPoints = document.getElementById("actPoints").value;
+    var actDesc = document.getElementById("actDesc").value;
+    if(!checkEmptyInput()){
+      table.rows[rIndex].cells[0].innerHTML = actNo;
+      table.rows[rIndex].cells[1].innerHTML = actName;
+      table.rows[rIndex].cells[2].innerHTML = actPoints;
+      table.rows[rIndex].cells[3].innerHTML =actDesc;
+    }
+  }
+  function deleteActivity(){
+    table.deleteRow(rIndex);
+    document.getElementById("actNo").value="";
+    document.getElementById("actName").value="";
+    document.getElementById("actPoints").value="";
+    document.getElementById("actDesc").value="";
+  }
+
+
+  </script>
+</html>
