@@ -309,168 +309,167 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
 
     </script>
+      <script>
+        function eyePassword(){
+          var x = document.getElementById("adPassword");
+          if (x.type == "password"){
+            x.type = "text";
+          }else{
+            x.type = "password";
+          }
+        }
+        var table = document.getElementById("tableEdit");
+        var rIndex;
+        function selectedRow(){
+          for (var i = 0; i < table.rows.length; i++) {
+            table.rows[i].onclick = function(){
+              rIndex = this.rowIndex;
+              document.getElementById("actNo").value = this.cells[0].innerHTML;
+              document.getElementById("actName").value = this.cells[1].innerHTML;
+              document.getElementById("actPoints").value = this.cells[2].innerHTML;
+              document.getElementById("actDesc").value = this.cells[3].innerHTML;
+            };
+          }
+        }
+        selectedRow();
+        function checkEmptyInput(){
+          var isEmpty = false;
+          var actName = document.getElementById("actName").value;
+          var actPoints = document.getElementById("actPoints").value;
+          var actDesc = document.getElementById("actDesc").value;
+          var actNo = document.getElementById("actNo").value;
+          if (actName ==""){
+            alert("ActName is Empty");
+            isEmpty = true;
+          } else if (actPoints =="") {
+            alert("actPoints is Empty");
+            isEmpty = true;
+          } else if(actDesc==""){
+            alert("actDesc is Empty");
+            isEmpty = true;
+          }else if(actNo==""){
+            alert("actNo is Empty");
+            isEmpty = true;
+          }
+          return isEmpty;
+        }
+        function addActivity(){
+          if (!checkEmptyInput()) {
+            var newAct = table.insertRow(table.length);
+            var aNo = newAct.insertCell(0);
+            var aName = newAct.insertCell(1);
+            var aPoint = newAct.insertCell(2);
+            var aDesc = newAct.insertCell(3);
+            var actNo = document.getElementById("actNo").value;
+            var actName = document.getElementById("actName").value;
+            var actPoints = document.getElementById("actPoints").value;
+            var actDesc = document.getElementById("actDesc").value;
+            aNo.innerHTML = actNo;
+            aName.innerHTML = actName;
+            aPoint.innerHTML = actPoints;
+            aDesc.innerHTML = actDesc;
+            selectedRow();
+      
+          }
+        }
+      
+        function editActivity(){
+          var actNo = document.getElementById("actNo").value;
+          var actName = document.getElementById("actName").value;
+          var actPoints = document.getElementById("actPoints").value;
+          var actDesc = document.getElementById("actDesc").value;
+          if(!checkEmptyInput()){
+            table.rows[rIndex].cells[0].innerHTML = actNo;
+            table.rows[rIndex].cells[1].innerHTML = actName;
+            table.rows[rIndex].cells[2].innerHTML = actPoints;
+            table.rows[rIndex].cells[3].innerHTML =actDesc;
+          }
+        }
+        function deleteActivity(){
+          table.deleteRow(rIndex);
+          document.getElementById("actNo").value="";
+          document.getElementById("actName").value="";
+          document.getElementById("actPoints").value="";
+          document.getElementById("actDesc").value="";
+        }
+        var benefitTable = document.getElementById("tableBenefit");
+       function selectedBenefit(){
+         for (var i = 0; i < benefitTable.rows.length; i++) {
+           benefitTable.rows[i].onclick = function(){
+             rIndex = this.rowIndex;
+             document.getElementById("benNo").value = this.cells[0].innerHTML;
+             document.getElementById("benCode").value = this.cells[1].innerHTML;
+             document.getElementById("benCost").value = this.cells[2].innerHTML;
+             document.getElementById("benDesc").value = this.cells[3].innerHTML;
+           };
+         }
+       }
+       selectedBenefit();
+       function checkBenEmptyInput(){
+         var isEmpty = false;
+         document.getElementById("benNo").value;
+         document.getElementById("benCode").value;
+         document.getElementById("benCost").value;
+         document.getElementById("benDesc").value;
+         var benNo = document.getElementById("benNo").value;
+         var benCode = document.getElementById("benCode").value;
+         var benCost = document.getElementById("benCost").value;
+         var benDesc = document.getElementById("benDesc").value;
+         if (benNo ==""){
+           alert("benNo is Empty");
+           isEmpty = true;
+         } else if (benCode =="") {
+           alert("benCode is Empty");
+           isEmpty = true;
+         } else if(benCost==""){
+           alert("benCost is Empty");
+           isEmpty = true;
+         }else if(benDesc==""){
+           alert("benDesc is Empty");
+           isEmpty = true;
+         }
+         return isEmpty;
+       }
+       function addBenefit(){
+         if (!checkBenEmptyInput()) {
+           var newBen = benefitTable.insertRow(benefitTable.length);
+           var bNo = newBen.insertCell(0);
+           var bCode = newBen.insertCell(1);
+           var bCost = newBen.insertCell(2);
+           var bDesc = newBen.insertCell(3);
+           var benNo1 = document.getElementById("benNo").value;
+           var benCode1 = document.getElementById("benCode").value;
+           var benCost1 = document.getElementById("benCost").value;
+           var benDesc1 = document.getElementById("benDesc").value;
+           bNo.innerHTML = benNo1;
+           bCode.innerHTML = benCode1;
+           bCost.innerHTML = benCost1;
+           bDesc.innerHTML = benDesc1;
+           selectedBenefit();
+         }
+       }
+      
+       function editBenefit(){
+         var benNo = document.getElementById("benNo").value;
+         var benCode = document.getElementById("benCode").value;
+         var benCost = document.getElementById("benCost").value;
+         var benDesc = document.getElementById("benDesc").value;
+         if(!checkBenEmptyInput()){
+           benefitTable.rows[rIndex].cells[0].innerHTML = benNo;
+           benefitTable.rows[rIndex].cells[1].innerHTML = benCode;
+           benefitTable.rows[rIndex].cells[2].innerHTML = benCost;
+           benefitTable.rows[rIndex].cells[3].innerHTML =benDesc;
+         }
+       }
+       function deleteBenefit(){
+         benefitTable.deleteRow(rIndex);
+         document.getElementById("benNo").value="";
+         document.getElementById("benCode").value="";
+         document.getElementById("benCost").value="";
+         document.getElementById("benDesc").value="";
+       }
+      
+      
+        </script>
   </body>
-
-  <script>
-  function eyePassword(){
-    var x = document.getElementById("adPassword");
-    if (x.type == "password"){
-      x.type = "text";
-    }else{
-      x.type = "password";
-    }
-  }
-  var table = document.getElementById("tableEdit");
-  var rIndex;
-  function selectedRow(){
-    for (var i = 0; i < table.rows.length; i++) {
-      table.rows[i].onclick = function(){
-        rIndex = this.rowIndex;
-        document.getElementById("actNo").value = this.cells[0].innerHTML;
-        document.getElementById("actName").value = this.cells[1].innerHTML;
-        document.getElementById("actPoints").value = this.cells[2].innerHTML;
-        document.getElementById("actDesc").value = this.cells[3].innerHTML;
-      };
-    }
-  }
-  selectedRow();
-  function checkEmptyInput(){
-    var isEmpty = false;
-    var actName = document.getElementById("actName").value;
-    var actPoints = document.getElementById("actPoints").value;
-    var actDesc = document.getElementById("actDesc").value;
-    var actNo = document.getElementById("actNo").value;
-    if (actName ==""){
-      alert("ActName is Empty");
-      isEmpty = true;
-    } else if (actPoints =="") {
-      alert("actPoints is Empty");
-      isEmpty = true;
-    } else if(actDesc==""){
-      alert("actDesc is Empty");
-      isEmpty = true;
-    }else if(actNo==""){
-      alert("actNo is Empty");
-      isEmpty = true;
-    }
-    return isEmpty;
-  }
-  function addActivity(){
-    if (!checkEmptyInput()) {
-      var newAct = table.insertRow(table.length);
-      var aNo = newAct.insertCell(0);
-      var aName = newAct.insertCell(1);
-      var aPoint = newAct.insertCell(2);
-      var aDesc = newAct.insertCell(3);
-      var actNo = document.getElementById("actNo").value;
-      var actName = document.getElementById("actName").value;
-      var actPoints = document.getElementById("actPoints").value;
-      var actDesc = document.getElementById("actDesc").value;
-      aNo.innerHTML = actNo;
-      aName.innerHTML = actName;
-      aPoint.innerHTML = actPoints;
-      aDesc.innerHTML = actDesc;
-      selectedRow();
-
-    }
-  }
-
-  function editActivity(){
-    var actNo = document.getElementById("actNo").value;
-    var actName = document.getElementById("actName").value;
-    var actPoints = document.getElementById("actPoints").value;
-    var actDesc = document.getElementById("actDesc").value;
-    if(!checkEmptyInput()){
-      table.rows[rIndex].cells[0].innerHTML = actNo;
-      table.rows[rIndex].cells[1].innerHTML = actName;
-      table.rows[rIndex].cells[2].innerHTML = actPoints;
-      table.rows[rIndex].cells[3].innerHTML =actDesc;
-    }
-  }
-  function deleteActivity(){
-    table.deleteRow(rIndex);
-    document.getElementById("actNo").value="";
-    document.getElementById("actName").value="";
-    document.getElementById("actPoints").value="";
-    document.getElementById("actDesc").value="";
-  }
-  var benefitTable = document.getElementById("tableBenefit");
- function selectedBenefit(){
-   for (var i = 0; i < benefitTable.rows.length; i++) {
-     benefitTable.rows[i].onclick = function(){
-       rIndex = this.rowIndex;
-       document.getElementById("benNo").value = this.cells[0].innerHTML;
-       document.getElementById("benCode").value = this.cells[1].innerHTML;
-       document.getElementById("benCost").value = this.cells[2].innerHTML;
-       document.getElementById("benDesc").value = this.cells[3].innerHTML;
-     };
-   }
- }
- selectedBenefit();
- function checkBenEmptyInput(){
-   var isEmpty = false;
-   document.getElementById("benNo").value;
-   document.getElementById("benCode").value;
-   document.getElementById("benCost").value;
-   document.getElementById("benDesc").value;
-   var benNo = document.getElementById("benNo").value;
-   var benCode = document.getElementById("benCode").value;
-   var benCost = document.getElementById("benCost").value;
-   var benDesc = document.getElementById("benDesc").value;
-   if (benNo ==""){
-     alert("benNo is Empty");
-     isEmpty = true;
-   } else if (benCode =="") {
-     alert("benCode is Empty");
-     isEmpty = true;
-   } else if(benCost==""){
-     alert("benCost is Empty");
-     isEmpty = true;
-   }else if(benDesc==""){
-     alert("benDesc is Empty");
-     isEmpty = true;
-   }
-   return isEmpty;
- }
- function addBenefit(){
-   if (!checkBenEmptyInput()) {
-     var newBen = benefitTable.insertRow(benefitTable.length);
-     var bNo = newBen.insertCell(0);
-     var bCode = newBen.insertCell(1);
-     var bCost = newBen.insertCell(2);
-     var bDesc = newBen.insertCell(3);
-     var benNo1 = document.getElementById("benNo").value;
-     var benCode1 = document.getElementById("benCode").value;
-     var benCost1 = document.getElementById("benCost").value;
-     var benDesc1 = document.getElementById("benDesc").value;
-     bNo.innerHTML = benNo1;
-     bCode.innerHTML = benCode1;
-     bCost.innerHTML = benCost1;
-     bDesc.innerHTML = benDesc1;
-     selectedBenefit();
-   }
- }
-
- function editBenefit(){
-   var benNo = document.getElementById("benNo").value;
-   var benCode = document.getElementById("benCode").value;
-   var benCost = document.getElementById("benCost").value;
-   var benDesc = document.getElementById("benDesc").value;
-   if(!checkBenEmptyInput()){
-     benefitTable.rows[rIndex].cells[0].innerHTML = benNo;
-     benefitTable.rows[rIndex].cells[1].innerHTML = benCode;
-     benefitTable.rows[rIndex].cells[2].innerHTML = benCost;
-     benefitTable.rows[rIndex].cells[3].innerHTML =benDesc;
-   }
- }
- function deleteBenefit(){
-   benefitTable.deleteRow(rIndex);
-   document.getElementById("benNo").value="";
-   document.getElementById("benCode").value="";
-   document.getElementById("benCost").value="";
-   document.getElementById("benDesc").value="";
- }
-
-
-  </script>
 </html>
