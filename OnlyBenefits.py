@@ -13,7 +13,7 @@ def login(conn):
     #sql == 1 ---> FOUND
     if (sql==1):
         print("Do something about Logging in student")
-    else if (sql == 0):
+    elif (sql == 0):
         print("Do something about Logging in admin")
     
 
@@ -25,7 +25,7 @@ def signup(conn,sName, sSurname,sEmail,sPassword):
         val = (sEmail, sPassword, sName, sSurname,null, 150)
         cursor.execute(sql,val)
         conn.commit()
-    else if (sEmail.endswith("uwc.ac.za")== True):
+    elif (sEmail.endswith("uwc.ac.za")== True):
         sql = """INSERT INTO admin (Email, Password, Name, Surname) VALUES (%s,%s,%s,%s)"""
         val = (sEmail, sPassword, sName, sSurname)
         cursor.execute(sql,val)
