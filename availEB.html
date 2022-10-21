@@ -86,11 +86,12 @@
                           <div class="modal-body">
 
                             <label for="verCode" class="form-label" >Verification Code for Event Attendance</label>
-                            <input type="text" class="form-control" id="benNo" required>
+                            <input type="text" class="form-control" id="verCode" required>
+
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Register Event</button>
+                            <button type="button" id="registerEvent" class="btn btn-primary" data-bs-dismiss="modal" >Register Event</button>
                           </div>
                         </div>
                       </div>
@@ -113,7 +114,7 @@
     <div class="text-bg-light p-3" style="font-size: 20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
       <div class="container my-3">
         <div class="row">
-          <h1 class="text-center" style="font-family: 'Franklin Gothic Medium'; font-size:70px;">AVAILABLE BENEFITS</h1>
+          <h1 class="text-center" style="font-family: 'Franklin Gothic Medium'; font-size:70px;background-color:#02083d;color:white;">AVAILABLE BENEFITS</h1>
             <div class="container text-dark my-3" style="font-size: 20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
               <p></p>
               <div class="row">
@@ -234,6 +235,10 @@
       }
     }
     selectedBenefit();
+
+
+
+}
 
   </script>
 
