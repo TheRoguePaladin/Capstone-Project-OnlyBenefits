@@ -59,17 +59,17 @@
                       <tbody>
                         <tr >
                           <th scope= "row">1</th>
-                          <td>get dunkd</td>
+                          <td>Hackathon</td>
                           <td>1000</td>
                         </tr>
                         <tr>
                           <th scope = "row">2</th>
-                          <td>get dunkd</td>
+                          <td>Tuks vs UWC Rugby</td>
                           <td>1000</td>
                         </tr>
                         <tr>
                           <th scope = "row">3</th>
-                          <td>get dunkd</td>
+                          <td>Study Buddy</td>
                           <td>1000</td>
                         </tr>
                       </tbody>
@@ -85,13 +85,21 @@
                           </div>
                           <div class="modal-body">
 
-                            <label for="verCode" class="form-label" >Verification Code for Event Attendance</label>
-                            <input type="text" class="form-control" id="verCode" required>
+
+                            <label for="eName" class="form-label" style="color: #02083d;font-size:40px;" >Event Name: </label>
+                            <div class="col-sm-10">
+                              <input type="text" readonly  class="form-label" id="eName" style="border:none;" required>
+                            </div>
+                            <label for="ePoints" class="form-label" style="color: #02083d;font-size:40px;" >Total Points: </label>
+                            <div class="col-sm-10">
+                              <input type="ePoints" readonly  class="form-label" id="ePoints" style="border:none;" required>
+                            </div>
+
 
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-                            <button type="button" id="registerEvent" style="background-color:#02083d" class="btn btn-primary" data-bs-dismiss="modal" >Register Event</button>
+                            <button type="button" id="registerEvent" style="background-color:#f54c0a" class="btn btn-primary" data-bs-dismiss="modal" >Register Event</button>
                           </div>
                         </div>
                       </div>
@@ -132,17 +140,17 @@
                       <tbody>
                         <tr >
                           <th scope= "row">1</th>
-                          <td>get dunkd</td>
+                          <td>10% Discount at all Cafeteria restaurants</td>
                           <td>1000</td>
                         </tr>
                         <tr>
                           <th scope = "row">2</th>
-                          <td>get dunkd</td>
+                          <td>Free Coffee at Vidae Cafe</td>
                           <td>1000</td>
                         </tr>
                         <tr>
                           <th scope = "row">3</th>
-                          <td>get dunkd</td>
+                          <td>7 days Free Gym membership</td>
                           <td>1000</td>
                         </tr>
                       </tbody>
@@ -156,11 +164,26 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            By clicking Confirm, you ackowledge the deduction of points. Your benefit voucher will be emailed to you!
+
+                            <label for="bDisc" class="form-label" style="color: #02083d;font-size:40px;">Event Name: </label>
+                            <div class="col-sm-10">
+                              <input type="text" readonly  class="form-label" id="bDisc" style="border:none; width:100%; " required>
+                            </div>
+                            <label for="bPoints" class="form-label" style="color: #02083d; font-size:40px;" >Total Points: </label>
+
+                            <div class="col-sm-50">
+                              <input type="ePoints" readonly  class="form-label" id="bPoints" style="border:none; " required>
+                            </div>
+
+                            <div class="container my-3">
+                            By clicking Confirm, you ackowledge the deduction of points.
+                            Your benefit voucher will be emailed to you!
+                            </div>
+
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" style="background-color:#02083d" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+                            <button type="button" style="background-color:#f54c0a" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
 
                           </div>
                         </div>
@@ -215,8 +238,14 @@
       for (var i = 0; i < table.rows.length; i++) {
           table.rows[i].onclick = function(){
           rIndex = this.rowIndex;
+
+          document.getElementById("eName").value = this.cells[1].innerHTML;
+          document.getElementById("ePoints").value = this.cells[2].innerHTML;
+
           let myModal = new bootstrap.Modal(document.getElementById('BookEvt'), {});
           myModal.show();
+
+
 
         };
       }
@@ -228,6 +257,10 @@
       for (var i = 0; i < benefitTable.rows.length; i++) {
           benefitTable.rows[i].onclick = function(){
           rIndex = this.rowIndex;
+
+          document.getElementById("bDisc").value = this.cells[1].innerHTML;
+          document.getElementById("bPoints").value = this.cells[2].innerHTML;
+
           let benModal = new bootstrap.Modal(document.getElementById('redeemBen'), {});
           benModal.show();
 
