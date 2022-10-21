@@ -328,6 +328,7 @@
               document.getElementById("actName").value = this.cells[1].innerHTML;
               document.getElementById("actPoints").value = this.cells[2].innerHTML;
               document.getElementById("actDesc").value = this.cells[3].innerHTML;
+              alert("sfs");
             };
           }
         }
@@ -369,10 +370,10 @@
             aPoint.innerHTML = actPoints;
             aDesc.innerHTML = actDesc;
             selectedRow();
-      
+
           }
         }
-      
+
         function editActivity(){
           var actNo = document.getElementById("actNo").value;
           var actName = document.getElementById("actName").value;
@@ -448,7 +449,7 @@
            selectedBenefit();
          }
        }
-      
+
        function editBenefit(){
          var benNo = document.getElementById("benNo").value;
          var benCode = document.getElementById("benCode").value;
@@ -468,8 +469,8 @@
          document.getElementById("benCost").value="";
          document.getElementById("benDesc").value="";
        }
-      
-      
+
+
         </script>
   </body>
 </html>
