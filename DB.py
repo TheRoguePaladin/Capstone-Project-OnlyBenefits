@@ -112,10 +112,10 @@ def Benefit(A):
     db.commit()
 
 def EditPass(A):
-    if(STUDENTNUMBER.indexof(@)!=-1):
-        Script="UPDATE Student SET VALUES Password = "= A +"WHERE StudentNum = "+STUDENTNUMBER
-    else
-        Script="UPDATE Admin SET VALUES Password = "= A +"WHERE EmailAdrress = "+STUDENTNUMBER
+    if(STUDENTNUMBER.indexof()!=-1):
+        Script="UPDATE Student SET VALUES Password = "+ A +"WHERE StudentNum = "+STUDENTNUMBER
+    else:
+        Script="UPDATE Admin SET VALUES Password = "+ A +"WHERE EmailAdrress = "+STUDENTNUMBER
     mycursor.execute(Script)
 
     db.commit()
