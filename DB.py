@@ -1,3 +1,4 @@
+from xml.dom.minidom import Element
 import mysql.connector
 import sys
 db=mysql.connector.connect(
@@ -77,9 +78,13 @@ def Redeem(Code):
         db.commit()
 
 
-def SignUP(StudentName,StudentEmail, Password):
-
-    Script="INSERT INTO Student(Name,Email,Password) VALUES ('"+StudentName+"','"+StudentEmail+"','"+Password+"')"
+def SignUp(*args, **kwargs):
+    StudentName = Element("signName").element.value + " "+ Element("signSurname").element.value
+    StudentEmail = Element("floatingInput").element.value
+    StudentPass = Element("floatingRePassword").element.value
+    StudentNum = Element("floatingInput").element.value
+    StudentNum = StudentNum[:6]
+    Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
     mycursor.execute(Script)
 
     db.commit()
