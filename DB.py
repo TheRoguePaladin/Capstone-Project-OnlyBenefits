@@ -1,5 +1,6 @@
 from xml.dom.minidom import Element
 import mysql.connector
+import js
 import sys
 db=mysql.connector.connect(
 host="localhost",
@@ -78,11 +79,11 @@ def Redeem(Code):
         db.commit()
 
 
-def SignUp(*args, **kwargs):
-    StudentName = Element("signName").element.value + " "+ Element("signSurname").element.value
-    StudentEmail = Element("floatingInput").element.value
-    StudentPass = Element("floatingRePassword").element.value
-    StudentNum = Element("floatingInput").element.value
+def SignUp(e):
+    StudentName = document.getElementById("signName").value+ " "+ document.getElementById("signSurname").value
+    StudentEmail = document.getElementById("floatingInput").value
+    StudentPass = document.getElementById("floatingRePassword").value
+    StudentNum = document.getElementById("floatingInput").value
     StudentNum = StudentNum[:6]
     Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
     mycursor.execute(Script)
