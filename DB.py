@@ -77,9 +77,9 @@ def Redeem(Code):
         db.commit()
 
 
-def SignUP(StudentNumber,StudentName,StudentEmail):
+def SignUP(StudentName,StudentEmail, Password):
 
-    Script="INSERT INTO Student(StudentNum,Name,Email) VALUES ('"+StudentNumber+"','"+StudentName+"','"+StudentEmail+"')"
+    Script="INSERT INTO Student(Name,Email,Password) VALUES ('"+StudentName+"','"+StudentEmail+"','"+Password+"')"
     mycursor.execute(Script)
 
     db.commit()
