@@ -7,6 +7,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'Innovatech'
+
 db=mysql.connector.connect(
 host="localhost",
   user="root",
@@ -15,12 +16,40 @@ host="localhost",
 )
 mysql = MySQL(app)
 
+mycursor = db.cursor(buffered=True)
 
-@app.route('/signup')
+@app.route('/signup.html')
 def signup():
     return render_template('signup.html')
 
- 
+@app.route('/login.html')
+def login():
+    return render_template('login.html')
+
+@app.route('/home.html')
+def home():
+    return render_template('home.html')
+
+@app.route('/editProfile.html')
+def editProfile():
+    return render_template('editProfile.html')
+
+@app.route('/editadminprofile.html')
+def editadminprofile():
+    return render_template('editadminprofile.html')
+
+@app.route('/availEB.html')
+def availEB():
+    return render_template('availEB.html')
+
+@app.route('/adminProfile.html')
+def adminProfile():
+    return render_template('adminProfile.html')
+
+@app.route('/aboutus.html')
+def aboutus():
+    return render_template('aboutus.html')
+
 app.run(host='localhost', port=5000)
 
 STUDENTNUMBER="123456"
