@@ -75,8 +75,6 @@ def Password(User,Pass):
         return 0
 
 def AdminPassword():
-    User=input("Enter Your Email ")
-    Pass=input("Password ")
     Script= "SELECT Password FROM Admin WHERE Email = "+User
     mycursor.execute(Script)
     C=mycursor.fetchall()
@@ -173,9 +171,12 @@ while True:
     PP= input("1 for login \n2 for Redeem points \n3 for Sign-up an account \n4 for admin login \n5 Add Benefits \n6 Add Events \n7 Remove Event \n8 Remove Benefit \n9 Edit Password ")
     if PP =="1":
 
-        a=input("StudentNumber ")
+        a=input("StudentNumber/Email ")
         b=input("Password ")
-        Password(a,b)
+        if(a.endswith("@gmail.com")):
+            AdminPassword(a)
+        else:
+            Password(a,b)
 
     if PP =="2":
 
