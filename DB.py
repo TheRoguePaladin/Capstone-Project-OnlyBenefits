@@ -50,6 +50,10 @@ def adminProfile():
 def aboutus():
     return render_template('aboutus.html')
 
+@app.route('/profile.html')
+def profile():
+    return render_template('profile.html')
+
 app.run(host='localhost', port=5000)
 
 STUDENTNUMBER="123456"
