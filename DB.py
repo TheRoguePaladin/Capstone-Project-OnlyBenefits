@@ -119,7 +119,7 @@ def Redeem(Code):
         db.commit()
 
 
-def SignUp(e):
+def SignUpSave(e):
     #StudentName = document.getElementById("signName").value+ " "+ document.getElementById("signSurname").value
     #StudentEmail = document.getElementById("floatingInput").value
     #StudentPass = document.getElementById("floatingRePassword").value

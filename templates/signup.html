@@ -23,7 +23,43 @@
       obj.Email = document.getElementById('floatingInput').value;
       return obj;
     };
+    var Save = function () {
+      var obj = new StudentObj();
+      obj = LoadItem(obj);
+      if (obj.StudentName == "") {
+          if (obj.Password == "") {
+              $.ajax({
+                  type: "POST",
+                  async: false,
+                  url: document.location.pathname + "/SignUpSave",
+                  data: "{'obj': " + JSON.stringify(obj) + "}",
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                  success: function (result) {
+                    document.getElementById('floatingInput').value = '';
+                    document.getElementById('signName').value = '';
+                    document.getElementById("signSurname").value='';
+                    document.getElementById('floatingPassword').value='';
+                    document.getElementById('floatingRePassword').value='';
+                    window.location.href("login.html")                    
+                  },
+                  error: function (xhr, textStatus, errorThrown) {
+                      console.log('XHR ERROR ' + xhr.status);
+                      console.log('Full ERROR ' + xhr.responseText);
+                      alert("Could not load page");
+                  }
+              });
 
+          }
+          else {
+              alert("Please enter a Password!");
+
+          }
+      }
+      else {
+          alert("Please enter a Name");
+    }
+    };
     </script>
   </head>
   <body style="background-color: #02083d; font-family: Franklin Gothic Medium;">
