@@ -50,6 +50,10 @@ def adminProfile():
 def aboutus():
     return render_template('aboutus.html')
 
+@app.route('/profile.html')
+def profile():
+    return render_template('profile.html')
+
 app.run(host='localhost', port=5000)
 
 STUDENTNUMBER="123456"
@@ -183,7 +187,7 @@ while True:
         a=input("Please enter your Student Number")
         b=input("Please enter your Student Name")
         c=input("Please enter your EmailAdrress")
-        SignUp(a,b,c)
+        SignUpSave(a,b,c)
 
     if PP =="4":
         AdminPassword()
