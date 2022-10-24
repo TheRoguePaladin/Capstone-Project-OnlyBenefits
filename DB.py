@@ -1,16 +1,27 @@
-from xml.dom.minidom import Element
 import mysql.connector
-import js
 import sys
+from flask import Flask, render_template, request
+from flask_mysqldb import MySQL
+app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'Innovatech'
 db=mysql.connector.connect(
 host="localhost",
   user="root",
   passwd="",
   database="Innovatech" # Only used if DATABASE is created already.
 )
+mysql = MySQL(app)
 
 
-mycursor = db.cursor(buffered=True)
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+ 
+app.run(host='localhost', port=5000)
 
 STUDENTNUMBER="123456"
 
@@ -80,13 +91,13 @@ def Redeem(Code):
 
 
 def SignUp(e):
-    StudentName = document.getElementById("signName").value+ " "+ document.getElementById("signSurname").value
-    StudentEmail = document.getElementById("floatingInput").value
-    StudentPass = document.getElementById("floatingRePassword").value
-    StudentNum = document.getElementById("floatingInput").value
-    StudentNum = StudentNum[:6]
-    Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
-    mycursor.execute(Script)
+    #StudentName = document.getElementById("signName").value+ " "+ document.getElementById("signSurname").value
+    #StudentEmail = document.getElementById("floatingInput").value
+    #StudentPass = document.getElementById("floatingRePassword").value
+    #StudentNum = document.getElementById("floatingInput").value
+    #StudentNum = StudentNum[:6]
+    #Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
+    #mycursor.execute(Script)
 
     db.commit()
 
@@ -169,4 +180,3 @@ while True:
         EditPass(New)
 
 
-db.commit()
