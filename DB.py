@@ -1,6 +1,6 @@
 import mysql.connector
 import sys
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
@@ -20,15 +20,20 @@ mycursor = db.cursor(buffered=True)
 
 @app.route('/signup.html', methods=['POST', 'GET'])
 def signup():
-    if request.method == "POST":
-        userData = request.get_json()
-        StudentNum = userData[0]
-        StudentName = userData[1]
-        StudentPass = userData[2]
-        StudentEmail = userData[3]
-        Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
     return render_template('signup.html')
 
+
+@app.route('/signUpSave', methods=['POST', 'GET'])
+def insertUser():
+  if request.method == "POST":
+    userData = request.get_json()
+    print(userData)
+    #Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
+    #mycursor.execute(Script)
+
+    #db.commit()
+    results = {'processed': 'true'}
+    return jsonify(results)
 
 @app.route('/login.html')
 def login():
@@ -82,7 +87,9 @@ def Password(User,Pass):
     else:
         return 0
 
-def AdminPassword(User,Pass):
+def AdminPassword():
+    User=input("Enter Your Email ")
+    Pass=input("Password ")
     Script= "SELECT Password FROM Admin WHERE Email = "+User
     mycursor.execute(Script)
     C=mycursor.fetchall()
@@ -135,10 +142,8 @@ def SignUpSave(e):
     #StudentPass = document.getElementById("floatingRePassword").value
     #StudentNum = document.getElementById("floatingInput").value
     #StudentNum = StudentNum[:6]
-    #Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
-    #mycursor.execute(Script)
-
     db.commit()
+    
 
 def AddEvent(Code,Description,Cost):
 
@@ -179,12 +184,9 @@ while True:
     PP= input("1 for login \n2 for Redeem points \n3 for Sign-up an account \n4 for admin login \n5 Add Benefits \n6 Add Events \n7 Remove Event \n8 Remove Benefit \n9 Edit Password ")
     if PP =="1":
 
-        a=input("StudentNumber/Email ")
+        a=input("StudentNumber ")
         b=input("Password ")
-        if(a.endswith("@gmail.com")):
-            AdminPassword(a,b)
-        else:
-            Password(a,b)
+        Password(a,b)
 
     if PP =="2":
 

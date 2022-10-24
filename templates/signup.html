@@ -28,12 +28,11 @@
     var Save = function () {
       var obj = new StudentObj();
       obj = LoadItem(obj);
-
               $.ajax({
                   type: "POST",
                   async: false,
                   url:"/signUpSave",
-                  data: "{'obj': " + JSON.stringify(obj) + "}",
+                  data: JSON.stringify(obj),
                   contentType: "application/json; charset=utf-8",
                   dataType: "json",
                   success: function (result) {
