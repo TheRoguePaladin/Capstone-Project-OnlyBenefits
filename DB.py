@@ -74,7 +74,7 @@ def Password(User,Pass):
     else:
         return 0
 
-def AdminPassword():
+def AdminPassword(User,Pass):
     Script= "SELECT Password FROM Admin WHERE Email = "+User
     mycursor.execute(Script)
     C=mycursor.fetchall()
@@ -174,7 +174,7 @@ while True:
         a=input("StudentNumber/Email ")
         b=input("Password ")
         if(a.endswith("@gmail.com")):
-            AdminPassword(a)
+            AdminPassword(a,b)
         else:
             Password(a,b)
 
