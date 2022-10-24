@@ -18,9 +18,17 @@ mysql = MySQL(app)
 
 mycursor = db.cursor(buffered=True)
 
-@app.route('/signup.html')
+@app.route('/signup.html', methods=['POST', 'GET'])
 def signup():
+    if request.method == "POST":
+        userData = request.get_json()
+        StudentNum = userData[0]
+        StudentName = userData[1]
+        StudentPass = userData[2]
+        StudentEmail = userData[3]
+        Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
     return render_template('signup.html')
+
 
 @app.route('/login.html')
 def login():
