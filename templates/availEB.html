@@ -7,6 +7,154 @@
     <link rel="stylesheet" href="../static/styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      var nodesEvents = [];
+      var LoadListEvents = function () {
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/loadEvents",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                try {
+                  console.log(result)
+                  nodesEvents =JSON.parse(JSON.stringify(result))
+                  console.log(nodesEvents)
+                } catch (e) { }
+                var sb = "";
+
+                if (nodesEvents.length > 0) {
+                    for (var i = 0; i < nodesEvents.length; i++) {
+                        console.log(nodesEvents[i])
+                        var obj = nodesEvents[i];
+
+                        sb+=BuildItemEvents(obj);
+
+                    }
+                }
+                $("#tbodyEvents").html(sb.toString());
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('XHR ERROR ' + xhr.status);
+                console.log('Full ERROR ' + xhr.responseText);
+                alert("Could not load page");
+            }
+        });
+      };
+
+      var BuildItemEvents = function (obj) {
+        var sb = "";
+        sb+='<div class="whiteShadowBoxPlace" id="O_' + obj.OutcomeId.toString() + '">';
+        sb+='<table cellpadding="0" cellspacing="0" width="100%">';
+        sb+='<tr>';
+        sb+='<td align="left">';
+        sb+='<div class="txt16 bold">' + obj.Outcome + ' ';
+        sb+='</div></td>';
+        sb+='<td width="20%" align="left">';
+        sb+='</td>';
+        sb+='</tr>';
+        sb+='</table>';
+        sb+='</div>';
+        sb+='<br />';
+        return sb
+      };
+      var nodesBenefits = [];
+      var LoadListBenefits = function () {
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/loadBenefits",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                try {
+                  nodesBenefits = result.d;
+                } catch (e) { }
+                var sb = "";
+
+                if (nodesBenefits.length > 0) {
+                    for (var i = 0; i < nodesBenefits.length; i++) {
+                        var obj = nodesBenefits[i];
+
+                        sb+=BuildItemBenefits(obj);
+
+                    }
+                }
+                $("#tbodyBenefits").html(sb.toString());
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('XHR ERROR ' + xhr.status);
+                console.log('Full ERROR ' + xhr.responseText);
+                alert("Could not load page");
+            }
+        });
+      };
+
+      var BuildItemBenefits = function (obj) {
+        var sb = "";
+        sb+='<div class="whiteShadowBoxPlace" id="O_' + obj.OutcomeId.toString() + '">';
+        sb+='<table cellpadding="0" cellspacing="0" width="100%">';
+        sb+='<tr>';
+        sb+='<td align="left">';
+        sb+='<div class="txt16 bold">' + obj.Outcome + ' ';
+        sb+='</div></td>';
+        sb+='<td width="20%" align="left">';
+        sb+='</td>';
+        sb+='</tr>';
+        sb+='</table>';
+        sb+='</div>';
+        sb+='<br />';
+        return sb
+      };
+    </script>
+    <script>
+      var StudentObj = function () {
+      var obj = new Object();
+      obj.StudentNum = "";
+      obj.Password = "";
+      return obj;
+    };
+      var LoadItem = function (obj) {
+      obj.StudentNum = document.getElementById('floatingInput').value;
+      obj.StudentNum = obj.StudentNum.substring(0,6);
+      obj.Password = document.getElementById('floatingPassword').value;
+      
+      return obj;
+    };
+    var Save = function () {
+      var obj = new StudentObj();
+      obj = LoadItem(obj);
+              $.ajax({
+                  type: "POST",
+                  async: false,
+                  url: "/loginCheck",
+                  data: JSON.stringify(obj),
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                  success: function (result) {
+                    document.getElementById('floatingInput').value = '';
+                    document.getElementById('floatingPassword').value='';
+                    console.log("Result:");
+                    console.log(result);
+                    window.location = "home.html"                   
+                  },
+                  error: function (xhr, textStatus, errorThrown) {
+                      console.log('XHR ERROR ' + xhr.status);
+                      console.log('Full ERROR ' + xhr.responseText);
+                      alert("Could not load page");
+                  }
+              });
+    };
+    </script>
+    <script>
+      $(document).ready(function () {
+            LoadListBenefits();
+            LoadListEvents();
+        });
+    </script>
   </head>
   <body  style="background-color:#02083d">
 
@@ -57,7 +205,7 @@
                           <th scope="col">Points</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="tbodyEvents">
                         <tr >
                           <th scope= "row">123</th>
                           <td id="Event1">Tuks vs UWC Rugby</td>
@@ -108,12 +256,6 @@
                   </div>
                 </div>
               </div>
-
-
-
-
-
-
             </div>
     </div>
     </div>
@@ -138,7 +280,7 @@
                           <th scope="col">Points</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="tbodyBenefits">
                         <tr >
                           <th scope= "row">CAF4</th>
                           <td id="Benefit1">10% Discount at all Cafeteria restaurants</td>

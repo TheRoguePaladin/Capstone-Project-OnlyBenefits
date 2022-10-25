@@ -1,3 +1,4 @@
+from __future__ import print_function
 from re import U
 import mysql.connector
 import sys
@@ -42,8 +43,6 @@ def insertUser():
     results = {'processed': 'true'}
     return jsonify(results)
 
-
-
 @app.route('/login.html')
 def login():
     return render_template('login.html')
@@ -83,6 +82,22 @@ def editadminprofile():
 @app.route('/availEB.html')
 def availEB():
     return render_template('availEB.html')
+
+@app.route('/loadEvents', methods=['POST', 'GET'])
+def loadEvents():
+    Script="SELECT * from Event"
+    mycursor.execute(Script)
+    events = mycursor.fetchall()
+    print(events)
+    return jsonify(events)
+
+@app.route('/loadBenefits', methods=['POST', 'GET'])
+def loadBenefits():
+    Script="SELECT * from Benefits"
+    mycursor.execute(Script)
+    events = mycursor.fetchall()
+    print(events)
+    return jsonify(events)
 
 @app.route('/adminProfile.html')
 def adminProfile():
