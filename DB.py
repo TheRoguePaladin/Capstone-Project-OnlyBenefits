@@ -1,6 +1,7 @@
+from re import U
 import mysql.connector
 import sys
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, json
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
@@ -28,16 +29,44 @@ def insertUser():
   if request.method == "POST":
     userData = request.get_json()
     print(userData)
-    #Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
-    #mycursor.execute(Script)
-
-    #db.commit()
+    userDetails = json.dumps(userData)
+    print(userDetails)
+    userDetailsToInsert = eval(userDetails)
+    StudentNum = userDetailsToInsert["StudentNum"]
+    StudentName = userDetailsToInsert["StudentName"]
+    StudentEmail = userDetailsToInsert["Email"]
+    StudentPass = userDetailsToInsert["Password"]
+    Script="INSERT INTO Student(StudentNum,Name,Email,Password) VALUES ('"+StudentNum+"','"+StudentName+"','"+StudentEmail+"','"+StudentPass+"')"
+    mycursor.execute(Script)
+    db.commit()
     results = {'processed': 'true'}
     return jsonify(results)
+
+
 
 @app.route('/login.html')
 def login():
     return render_template('login.html')
+
+@app.route('/loginCheck', methods=['POST', 'GET'])
+def CheckUser():
+  if request.method == "POST":
+    userData = request.get_json()
+    print(userData)
+    userDetails = json.dumps(userData)
+    print(userDetails)
+    userDetailsToInsert = eval(userDetails)
+    StudentNum = userDetailsToInsert["StudentNum"]
+    StudentPass = userDetailsToInsert["Password"]
+    Script="SELECT StudentNum,Password from Student"
+    mycursor.execute(Script)
+    students = mycursor.fetchall()
+    if StudentNum and StudentPass in students:
+        results = {'processed': 'true'}
+        return jsonify(results)
+    else:
+        results = {'processed': 'false'}
+        return jsonify(results)
 
 @app.route('/home.html')
 def home():

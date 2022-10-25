@@ -29,14 +29,16 @@
               $.ajax({
                   type: "POST",
                   async: false,
-                  url: document.location.pathname + "/home",
-                  data: "{'obj': " + JSON.stringify(obj) + "}",
+                  url: "/loginCheck",
+                  data: JSON.stringify(obj),
                   contentType: "application/json; charset=utf-8",
                   dataType: "json",
                   success: function (result) {
                     document.getElementById('floatingInput').value = '';
                     document.getElementById('floatingPassword').value='';
-                    window.location.href("login.html")                    
+                    console.log("Result:");
+                    console.log(result);
+                    //window.location.href("home.html")                    
                   },
                   error: function (xhr, textStatus, errorThrown) {
                       console.log('XHR ERROR ' + xhr.status);
@@ -56,7 +58,6 @@
     }
     };
     </script>
-    <py-script src="DB.py"></py-script>
   </head>
   <body style="background-color: #02083d; font-family: Franklin Gothic Medium;">
     <div class="container-fluid">
