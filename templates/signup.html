@@ -18,7 +18,7 @@
     };
       var LoadItem = function (obj) {
       obj.StudentNum = document.getElementById('floatingInput').value;
-      obj.StudentNum = obj.StudentNum.substring(0,6);
+      obj.StudentNum = obj.StudentNum.substring(0,7);
       obj.StudentName = document.getElementById('signName').value;
       obj.StudentName = obj.StudentName +" "+ document.getElementById('signSurname').value;
       obj.Password = document.getElementById('floatingRePassword').value;
@@ -43,7 +43,7 @@
                     document.getElementById('floatingRePassword').value='';
                     console.log("Result:");
                     console.log(result);
-                    window.location.href("login.html")                    
+                    window.location = "login.html";                   
                   },
                   error: function (xhr, textStatus, errorThrown) {
                       console.log('XHR ERROR ' + xhr.status);
