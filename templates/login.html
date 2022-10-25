@@ -16,7 +16,7 @@
     };
       var LoadItem = function (obj) {
       obj.StudentNum = document.getElementById('floatingInput').value;
-      obj.StudentNum = obj.StudentNum.substring(0,6);
+      obj.StudentNum = obj.StudentNum.substring(0,7);
       obj.Password = document.getElementById('floatingPassword').value;
       
       return obj;
@@ -32,6 +32,8 @@
                   contentType: "application/json; charset=utf-8",
                   dataType: "json",
                   success: function (result) {
+                    user = document.getElementById("floatingInput").value
+                    localStorage.setItem("User", user.substring(0,7));
                     document.getElementById('floatingInput').value = '';
                     document.getElementById('floatingPassword').value='';
                     console.log("Result:");

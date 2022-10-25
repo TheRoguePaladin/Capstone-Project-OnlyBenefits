@@ -8,6 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+      var currentUser = localStorage.getItem("User");
+      userCurrentNum = function(){
+        document.getElementById("currentUser").innerHTML = currentUser;
+      }
+    </script>
+    <script>
       var nodesEvents = [];
       var LoadListEvents = function () {
         $.ajax({
@@ -19,19 +25,14 @@
             dataType: "json",
             success: function (result) {
                 try {
-                  console.log(result)
-                  nodesEvents =JSON.parse(JSON.stringify(result))
-                  console.log(nodesEvents)
+                  nodesEvents = JSON.parse(JSON.stringify(result))
                 } catch (e) { }
                 var sb = "";
 
                 if (nodesEvents.length > 0) {
                     for (var i = 0; i < nodesEvents.length; i++) {
-                        console.log(nodesEvents[i])
                         var obj = nodesEvents[i];
-
                         sb+=BuildItemEvents(obj);
-
                     }
                 }
                 $("#tbodyEvents").html(sb.toString());
@@ -46,18 +47,19 @@
 
       var BuildItemEvents = function (obj) {
         var sb = "";
-        sb+='<div class="whiteShadowBoxPlace" id="O_' + obj.OutcomeId.toString() + '">';
-        sb+='<table cellpadding="0" cellspacing="0" width="100%">';
+        eventNum = 1;
         sb+='<tr>';
-        sb+='<td align="left">';
-        sb+='<div class="txt16 bold">' + obj.Outcome + ' ';
-        sb+='</div></td>';
-        sb+='<td width="20%" align="left">';
+        sb+='<th scope="row" id="EventID'+eventNum.toString()+'">';
+        sb+=obj["EventID"];
+        sb+='</th>';
+        sb+='<td id="EventDesc'+eventNum.toString()+'">';
+        sb+=obj["EventName"];
+        sb+='</td>';
+        sb+='<td id="EventPoints'+eventNum.toString()+'">';
+        sb+=obj["PointsReward"];
         sb+='</td>';
         sb+='</tr>';
-        sb+='</table>';
-        sb+='</div>';
-        sb+='<br />';
+        eventNum +=1;
         return sb
       };
       var nodesBenefits = [];
@@ -71,14 +73,13 @@
             dataType: "json",
             success: function (result) {
                 try {
-                  nodesBenefits = result.d;
+                  nodesBenefits = JSON.parse(JSON.stringify(result))
                 } catch (e) { }
                 var sb = "";
 
                 if (nodesBenefits.length > 0) {
                     for (var i = 0; i < nodesBenefits.length; i++) {
-                        var obj = nodesBenefits[i];
-
+                      var obj = nodesBenefits[i];
                         sb+=BuildItemBenefits(obj);
 
                     }
@@ -95,51 +96,50 @@
 
       var BuildItemBenefits = function (obj) {
         var sb = "";
-        sb+='<div class="whiteShadowBoxPlace" id="O_' + obj.OutcomeId.toString() + '">';
-        sb+='<table cellpadding="0" cellspacing="0" width="100%">';
+        BenNum = 1;
         sb+='<tr>';
-        sb+='<td align="left">';
-        sb+='<div class="txt16 bold">' + obj.Outcome + ' ';
-        sb+='</div></td>';
-        sb+='<td width="20%" align="left">';
+        sb+='<th scope="row" id="BenCode'+BenNum.toString()+'">';
+        sb+=obj["BenefitCode"];
+        sb+='</th>';
+        sb+='<td id="BenDesc'+BenNum.toString()+'">';
+        sb+=obj["BenefitDescription"];
+        sb+='</td>';
+        sb+='<td id="BenCost'+BenNum.toString()+'">';
+        sb+=obj["Cost"];
         sb+='</td>';
         sb+='</tr>';
-        sb+='</table>';
-        sb+='</div>';
-        sb+='<br />';
+        BenNum+=1;
         return sb
       };
     </script>
     <script>
-      var StudentObj = function () {
+      var RegisterObj = function () {
       var obj = new Object();
+      obj.EventID = "";
+      obj.EventPoints ="";
       obj.StudentNum = "";
-      obj.Password = "";
       return obj;
     };
       var LoadItem = function (obj) {
-      obj.StudentNum = document.getElementById('floatingInput').value;
-      obj.StudentNum = obj.StudentNum.substring(0,6);
-      obj.Password = document.getElementById('floatingPassword').value;
+      obj.StudentNum = localStorage.getItem("User");
+      obj.EventID = eID;
+      obj.EventPoints = eP;
       
       return obj;
     };
-    var Save = function () {
-      var obj = new StudentObj();
+    var RegisterEventSave = function () {
+      var obj = new RegisterObj();
       obj = LoadItem(obj);
               $.ajax({
                   type: "POST",
                   async: false,
-                  url: "/loginCheck",
+                  url: "/registerEvent",
                   data: JSON.stringify(obj),
                   contentType: "application/json; charset=utf-8",
                   dataType: "json",
                   success: function (result) {
-                    document.getElementById('floatingInput').value = '';
-                    document.getElementById('floatingPassword').value='';
                     console.log("Result:");
-                    console.log(result);
-                    window.location = "home.html"                   
+                    console.log(result);                 
                   },
                   error: function (xhr, textStatus, errorThrown) {
                       console.log('XHR ERROR ' + xhr.status);
@@ -149,10 +149,50 @@
               });
     };
     </script>
+        <script>
+          var BenefitObj = function () {
+          var obj = new Object();
+          obj.BCode = "";
+          obj.BPoints ="";
+          obj.StudentNum = "";
+          return obj;
+        };
+          var LoadItem = function (obj) {
+          obj.StudentNum = localStorage.getItem("User");
+          obj.BCode = bCode;
+          obj.BPoints = bP;
+          return obj;
+        };
+        var RedBenefitSave = function () {
+          var obj = new BenefitObj();
+          obj = LoadItem(obj);
+                  $.ajax({
+                      type: "POST",
+                      async: false,
+                      url: "/redeemBenefits",
+                      data: JSON.stringify(obj),
+                      contentType: "application/json; charset=utf-8",
+                      dataType: "json",
+                      success: function (result) {
+                        console.log("Result:");
+                        console.log(result);                 
+                      },
+                      error: function (xhr, textStatus, errorThrown) {
+                          console.log('XHR ERROR ' + xhr.status);
+                          console.log('Full ERROR ' + xhr.responseText);
+                          alert("Could not load page");
+                      }
+                  });
+        };
+        </script>
     <script>
       $(document).ready(function () {
             LoadListBenefits();
             LoadListEvents();
+            selectedRow();
+            selectedBenefit();
+            userCurrentNum();
+
         });
     </script>
   </head>
@@ -181,6 +221,8 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="profile.html">View</a></li>
               <li><a class="dropdown-item" href="login.html">Logout</a></li>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" id="currentUser">StudentNum</a>
             </ul>
           </li>
         </ul>
@@ -196,7 +238,7 @@
               <div class="row">
                 <div class="card">
                   <h3 class="card-header">EVENTS</h3>
-                  <div class="card-body">
+                  <div class="card-body" id="divEvents">
                     <table class="table table-hover" id="evtTable">
                       <thead>
                         <tr>
@@ -207,19 +249,19 @@
                       </thead>
                       <tbody id="tbodyEvents">
                         <tr >
-                          <th scope= "row">123</th>
-                          <td id="Event1">Tuks vs UWC Rugby</td>
-                          <td>200</td>
+                          <th scope= "row"></th>
+                          <td id="Event1"></td>
+                          <td></td>
                         </tr>
                         <tr>
-                          <th scope = "row">246</th>
-                          <td id="Event2">UWC Hacktohon</td>
-                          <td>75</td>
+                          <th scope = "row"></th>
+                          <td id="Event2"></td>
+                          <td></td>
                         </tr>
                         <tr>
-                          <th scope = "row">369</th>
-                          <td id="Event3">UWC Study Buddy Program</td>
-                          <td>300</td>
+                          <th scope = "row"></th>
+                          <td id="Event3"></td>
+                          <td></td>
                         </tr>
                       </tbody>
                     </table>
@@ -248,7 +290,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-                            <button type="button" id="registerEvent" style="background-color:#f54c0a" class="btn btn-primary" data-bs-dismiss="modal" >Register Event</button>
+                            <button type="button" id="registerEvent" style="background-color:#f54c0a" class="btn btn-primary" data-bs-dismiss="modal" onclick="RegisterEventSave();">Register Event</button>
                           </div>
                         </div>
                       </div>
@@ -282,19 +324,19 @@
                       </thead>
                       <tbody id="tbodyBenefits">
                         <tr >
-                          <th scope= "row">CAF4</th>
-                          <td id="Benefit1">10% Discount at all Cafeteria restaurants</td>
-                          <td>150</td>
+                          <th scope= "row"></th>
+                          <td id="Benefit1"></td>
+                          <td></td>
                         </tr>
                         <tr>
-                          <th scope = "row">COF3</th>
-                          <td id="Benefit2">Free Coffee at Vidae Cafe</td>
-                          <td>50</td>
+                          <th scope = "row"></th>
+                          <td id="Benefit2"></td>
+                          <td></td>
                         </tr>
                         <tr>
-                          <th scope = "row">GYM2</th>
-                          <td id="Benefit3">7 days Free Gym membership</td>
-                          <td>200</td>
+                          <th scope = "row"></th>
+                          <td id="Benefit3"></td>
+                          <td></td>
                         </tr>
                       </tbody>
                     </table>
@@ -326,7 +368,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" style="background-color:#f54c0a" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+                            <button type="button" style="background-color:#f54c0a" class="btn btn-primary" data-bs-dismiss="modal" onclick="RedBenefitSave();">Confirm</button>
 
                           </div>
                         </div>
@@ -377,11 +419,14 @@
 
     var table = document.getElementById("evtTable");
     var rIndex;
+    var eID;
+    var eP;
     function selectedRow(){
       for (var i = 0; i < table.rows.length; i++) {
           table.rows[i].onclick = function(){
           rIndex = this.rowIndex;
-
+          eID = this.cells[0].innerHTML;
+          eP = this.cells[2].innerHTML;
           document.getElementById("eName").value = this.cells[1].innerHTML;
           document.getElementById("ePoints").value = this.cells[2].innerHTML;
 
@@ -393,25 +438,25 @@
         };
       }
     }
-    selectedRow();
 
+    var bCode;
+    var bP;
     var benefitTable = document.getElementById("BenTable");
     function selectedBenefit(){
       for (var i = 0; i < benefitTable.rows.length; i++) {
           benefitTable.rows[i].onclick = function(){
           rIndex = this.rowIndex;
-
+          bCode = this.cells[0].innerHTML;
+          bP = this.cells[2].innerHTML;
           document.getElementById("bDisc").value = this.cells[1].innerHTML;
           document.getElementById("bPoints").value = this.cells[2].innerHTML;
 
           let benModal = new bootstrap.Modal(document.getElementById('redeemBen'), {});
           benModal.show();
-
+          
         };
       }
     }
-    selectedBenefit();
-
 
 
 

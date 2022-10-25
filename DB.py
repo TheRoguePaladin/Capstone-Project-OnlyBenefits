@@ -87,17 +87,59 @@ def availEB():
 def loadEvents():
     Script="SELECT * from Event"
     mycursor.execute(Script)
+    row_headers=[x[0] for x in mycursor.description]
     events = mycursor.fetchall()
-    print(events)
-    return jsonify(events)
+    json_data=[]
+    for result in events:
+        json_data.append(dict(zip(row_headers,result)))
+    return jsonify(json_data)
 
 @app.route('/loadBenefits', methods=['POST', 'GET'])
 def loadBenefits():
     Script="SELECT * from Benefits"
     mycursor.execute(Script)
-    events = mycursor.fetchall()
-    print(events)
-    return jsonify(events)
+    row_headers=[x[0] for x in mycursor.description]
+    benefits = mycursor.fetchall()
+    json_data=[]
+    for result in benefits:
+        json_data.append(dict(zip(row_headers,result)))
+    return jsonify(json_data)
+
+@app.route('/registerEvent', methods=['POST', 'GET'])
+def AddPoints():
+  if request.method == "POST":
+    userData = request.get_json()
+    print(userData)
+    userDetails = json.dumps(userData)
+    print(userDetails)
+    userDetailsToInsert = eval(userDetails)
+    StudentNum = userDetailsToInsert["StudentNum"]
+    EventID = userDetailsToInsert["EventID"]
+    EventPoints = userDetailsToInsert["EventPoints"]
+    Script="INSERT INTO EventAttendees(StudentNumber,EventNumber) VALUES ('"+StudentNum+"','"+EventID+"')"
+    mycursor.execute(Script)
+    Script="UPDATE Student set CurrentPoints ="+EventPoints+" where StudentNum="+StudentNum
+    mycursor.execute(Script)
+    db.commit()
+    results = {'processed': 'true'}
+    return jsonify(results)
+
+@app.route('/redeemBenefits', methods=['POST', 'GET'])
+def RedeemBenefit():
+  if request.method == "POST":
+    userData = request.get_json()
+    print(userData)
+    userDetails = json.dumps(userData)
+    print(userDetails)
+    userDetailsToInsert = eval(userDetails)
+    StudentNum = userDetailsToInsert["StudentNum"]
+    BenefitCode = userDetailsToInsert["BCode"]
+    BenefitPoints = userDetailsToInsert["BPoints"]
+    Script="UPDATE Student set CurrentPoints =CurrentPoints-'"+BenefitPoints+"',CurrentBenefits='"+BenefitCode+"' where StudentNum="+StudentNum
+    mycursor.execute(Script)
+    db.commit()
+    results = {'processed': 'true'}
+    return jsonify(results)
 
 @app.route('/adminProfile.html')
 def adminProfile():
@@ -179,14 +221,6 @@ def Redeem(Code):
 
         db.commit()
 
-
-def SignUpSave(e):
-    #StudentName = document.getElementById("signName").value+ " "+ document.getElementById("signSurname").value
-    #StudentEmail = document.getElementById("floatingInput").value
-    #StudentPass = document.getElementById("floatingRePassword").value
-    #StudentNum = document.getElementById("floatingInput").value
-    #StudentNum = StudentNum[:6]
-    db.commit()
     
 
 def AddEvent(Code,Description,Cost):
