@@ -120,16 +120,17 @@
       obj.StudentNum = "";
       return obj;
     };
-      var LoadItem = function (obj) {
-      obj.StudentNum = localStorage.getItem("User");
+      var LoadRegItem = function (obj) {
       obj.EventID = eID;
       obj.EventPoints = eP;
+      obj.StudentNum = localStorage.getItem("User");
+      
       
       return obj;
     };
     var RegisterEventSave = function () {
       var obj = new RegisterObj();
-      obj = LoadItem(obj);
+      obj = LoadRegItem(obj);
               $.ajax({
                   type: "POST",
                   async: false,
