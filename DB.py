@@ -118,7 +118,7 @@ def AddPoints():
     EventPoints = userDetailsToInsert["EventPoints"]
     Script="INSERT INTO EventAttendees(StudentNumber,EventNumber) VALUES ('"+StudentNum+"','"+EventID+"')"
     mycursor.execute(Script)
-    Script="UPDATE Student set CurrentPoints =CurrentPoints+"+EventPoints+" where StudentNum="+StudentNum
+    Script="UPDATE Student set CurrentPoints ="+EventPoints+" where StudentNum="+StudentNum
     mycursor.execute(Script)
     db.commit()
     results = {'processed': 'true'}
